@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subject: one
+  label: one
+  number: 1
+  content: MyText
+  question_img_src: MyString
+  correct_answer_no: 1
+  commentary: MyText
+  answer_img_src: MyString
+
+two:
+  subject: two
+  label: two
+  number: 1
+  content: MyText
+  question_img_src: MyString
+  correct_answer_no: 1
+  commentary: MyText
+  answer_img_src: MyString
