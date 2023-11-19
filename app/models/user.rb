@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :flagged_questions, through: :flags, source: :question
   has_many :user_question_relations
   has_many :answered_quesions, through: :user_question_relations, source: :question
-  has_many :api_keys
+  has_many :api_keys, dependent: :destroy
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
