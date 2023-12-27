@@ -81,5 +81,6 @@ test:
 #
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
-
+  database: pro_engineer_1st_exam_app_api_production
+  username: pro_engineer_1st_exam_app_api
+  password: <%= ENV["PRO_ENGINEER_1ST_EXAM_APP_API_DATABASE_PASSWORD"] %>
