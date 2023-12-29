@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :subjects, only: [:index]
       resource :authentication, only: [:create, :destroy]
-      resources :registrations, only: [:create, :destroy]
+      resource :registration, only: [:create, :destroy]
       resources :questions, only: [:index] do
         collection do
           get 'filter'
