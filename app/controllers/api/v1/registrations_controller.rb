@@ -13,7 +13,7 @@ class Api::V1::RegistrationsController < Api::V1::BaseController
       response.headers['AccessToken'] = api_key.access_token
       render json: json_string
     else
-      render_400(nil, @user.errors.full_messages)
+      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
