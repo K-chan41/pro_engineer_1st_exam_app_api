@@ -10,7 +10,7 @@ class Api::V1::BaseController < ApplicationController
   def authenticate
     authenticate_or_request_with_http_token do |token, _options|
       @_current_user ||= ApiKey.active.find_by(access_token: token)&.user
-    end
+    end || render_unauthorized
   end
 
   def current_user
@@ -31,4 +31,8 @@ class Api::V1::BaseController < ApplicationController
   private
 
   def form_authenticity_token; end
+
+  def render_unauthorized
+    render json: { error: 'ログインが必要です' }, status: :unauthorized
+  end
 end
