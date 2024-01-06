@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :questions, only: [:index] do
         collection do
           get 'filter'
+          get 'shuffle'
         end
       end
     end
