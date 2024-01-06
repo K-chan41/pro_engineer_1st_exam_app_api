@@ -22,11 +22,11 @@ class Api::V1::BaseController < ApplicationController
     response.headers['AccessToken'] = api_key.access_token
   end
 
-    # CORS設定
-    def set_cors_headers
-      headers['Access-Control-Allow-Origin'] = '*' # ここで許可するオリジンを設定
-      headers['Access-Control-Expose-Headers'] = 'AccessToken'
-    end
+  # CORS設定
+  def set_cors_headers
+    headers['Access-Control-Allow-Origin'] = '*' # ここで許可するオリジンを設定
+    headers['Access-Control-Expose-Headers'] = 'AccessToken'
+  end
 
   private
 
