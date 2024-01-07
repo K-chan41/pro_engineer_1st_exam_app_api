@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :flags, only: [:create, :destroy]
+      resources :user_question_relations, only: [:index, :create]
+      resources :flags, only: [:index, :create, :destroy]
       get 'user_info', to: 'users#show'
       resources :subjects, only: [:index]
       resource :authentication, only: [:create, :destroy]
