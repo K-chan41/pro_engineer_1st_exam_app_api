@@ -32,6 +32,21 @@ class Api::V1::QuestionsController < Api::V1::BaseController
     render json: json_string
   end
 
+  def flagged_questions
+    # current_user がフラグした問題を取得し、重複を削除
+    flagged_questions_ids = Flag
+                                .where(user: current_user)
+                                .select(:question_id)
+                                .group(:question_id)
+                                .order('MAX(flags.updated_at) DESC')
+                                .limit(10)
+                                .pluck(:question_id)
+  
+    flagged_questions = Question.includes(:choices, :subject, :label).where(id: flagged_questions_ids)
+    json_string = QuestionSerializer.new(flagged_questions, options).serializable_hash.to_json
+    render json: json_string
+  end
+
   private
 
   def options
