@@ -12,6 +12,7 @@ Rails.application.routes.draw do
           get 'filter'
           get 'shuffle'
           get 'recent_mistakes'
+          get 'flagged'
         end
       end
     end

@@ -18,14 +18,16 @@ class Api::V1::QuestionsController < Api::V1::BaseController
 
   def recent_mistakes
     # current_user が間違えた問題を取得し、重複を削除
-    mistaken_questions = UserQuestionRelation
-                            .joins(:question)
-                            .where(user: current_user)
-                            .where.not(answer: Question.arel_table[:correct_answer_no])
-                            .select('DISTINCT ON (questions.id) questions.*')
-                            .order('questions.id, user_question_relations.updated_at DESC')
-                            .limit(10)
-                            .map(&:question)
+    mistaken_questions_ids = UserQuestionRelation
+                                .where(user: current_user)
+                                .where.not(answer: Question.arel_table[:correct_answer_no])
+                                .select(:question_id)
+                                .group(:question_id)
+                                .order('MAX(user_question_relations.updated_at) DESC')
+                                .limit(10)
+                                .pluck(:question_id)
+  
+    mistaken_questions = Question.includes(:choices, :subject, :label).where(id: mistaken_questions_ids)
     json_string = QuestionSerializer.new(mistaken_questions, options).serializable_hash.to_json
     render json: json_string
   end
