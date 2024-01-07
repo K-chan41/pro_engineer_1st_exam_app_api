@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         collection do
           get 'filter'
           get 'shuffle'
+          get 'recent_mistakes'
         end
       end
     end
