@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Label do
-  it "subject-factoryが有効であること" do
+  it "label-factoryが有効であること" do
     expect(FactoryBot.build(:label)).to be_valid
   end
   
