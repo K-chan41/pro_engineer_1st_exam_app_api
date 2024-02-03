@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Choice, type: :model do
+describe Choice do
   it "choice-factoryが有効であること" do
     expect(FactoryBot.build(:choice)).to be_valid
   end

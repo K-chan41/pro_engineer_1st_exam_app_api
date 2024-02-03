@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :choice do
-    question
+    association :question
     sequence(:content) { |n| "ContentText#{n}" }
     order { (1..5).to_a.sample }
   end

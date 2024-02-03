@@ -24,4 +24,16 @@ describe User do
     user.valid?
     expect(user.errors[:email]).to include("has already been taken")
   end
+
+  describe '関連付け' do
+    it 'user_quesion_relationsに関連付いている' do
+      assoc = User.reflect_on_association(:user_question_relations)
+      expect(assoc.macro).to eq :has_many
+    end
+
+    it 'flagsに関連付いている' do
+      assoc = User.reflect_on_association(:flags)
+      expect(assoc.macro).to eq :has_many
+    end
+  end
 end

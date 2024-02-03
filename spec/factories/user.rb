@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :user, aliases: [:owner] do
+  factory :user do
     sequence(:name) { |n| "MyString#{n}" }
     sequence(:email) { |n| "user+#{n}@example.com" }
     password { 'password' }
