@@ -54,7 +54,6 @@ RSpec.describe 'Api::V1::Questions', type: :request, autodoc: true do
       expect(response.content_type).to eq('application/json; charset=utf-8')
   
       json_response = JSON.parse(response.body)
-      response.body
       expect(json_response['data'].size).to be <= 10 # 10問以下を確認
     end
   end
