@@ -35,5 +35,10 @@ describe User do
       assoc = User.reflect_on_association(:flags)
       expect(assoc.macro).to eq :has_many
     end
+
+    it 'api_keyに関連付いている' do
+      assoc = User.reflect_on_association(:api_keys)
+      expect(assoc.macro).to eq :has_many
+    end
   end
 end

@@ -28,9 +28,7 @@ RSpec.describe 'Api::V1::Questions', type: :request, autodoc: true do
   end
 
   describe 'GET /questions/shuffle' do
-    before do
-      create_list(:question, 10) # テスト用のQuestionレコードを10件作成
-    end
+    let!(:questions) { create_list(:question, 10) } # テスト用のQuestionレコードを10件作成
 
     it 'ランダム出題の際にjson形式で10問返ってくるか' do
       get shuffle_api_v1_questions_path, headers: auth_headers
@@ -44,9 +42,13 @@ RSpec.describe 'Api::V1::Questions', type: :request, autodoc: true do
   end
 
   describe 'GET /questions/recent_mistakes' do
-    let(:current_user) { create(:user) }
-    let!(:mistakes) { create_list(:user_question_relation, 10, user: current_user, answer: 1) } # 回答を作成
-  
+    before do
+      questions = create_list(:question, 10, correct_answer_no: 1)
+      questions.map do |question|
+        create(:user_question_relation, user: user, question: question, answer: 2)
+      end
+    end
+
     it '最近間違えた問題がjson形式で10問以下返ってくるか' do
       get recent_mistakes_api_v1_questions_path, headers: auth_headers
   
@@ -59,9 +61,13 @@ RSpec.describe 'Api::V1::Questions', type: :request, autodoc: true do
   end
 
   describe 'GET /questions/flagged_questions' do
-    let(:current_user) { create(:user) }
-    let!(:flags) { create_list(:flag, 10, user: current_user) } # フラグを設定
-  
+    before do
+      questions = create_list(:question, 10)
+      questions.map do |question|
+        create(:flag, user: user, question: question)
+      end
+    end
+
     it 'フラグした問題がjson形式で10問以下返ってくるか' do
       get flagged_questions_api_v1_questions_path, headers: auth_headers
   
@@ -69,7 +75,6 @@ RSpec.describe 'Api::V1::Questions', type: :request, autodoc: true do
       expect(response.content_type).to eq('application/json; charset=utf-8')
   
       json_response = JSON.parse(response.body)
-      response.body
       expect(json_response['data'].size).to be <= 10 # 10問以下を確認
     end
   end
