@@ -21,8 +21,6 @@ RSpec.describe 'Api::V1::Questions', type: :request, autodoc: true do
       expect(json_response['data']).not_to be_empty
 
       first_question = json_response['data'].first
-      response.body
-      expected_question
       expect(first_question['attributes']['content']).to eq(expected_question.content) # 期待する問題が返ってきているか確認
     end
   end
@@ -51,10 +49,10 @@ RSpec.describe 'Api::V1::Questions', type: :request, autodoc: true do
 
     it '最近間違えた問題がjson形式で10問以下返ってくるか' do
       get recent_mistakes_api_v1_questions_path, headers: auth_headers
-  
+
       expect(response).to have_http_status(:ok)
       expect(response.content_type).to eq('application/json; charset=utf-8')
-  
+
       json_response = JSON.parse(response.body)
       expect(json_response['data'].size).to be <= 10 # 10問以下を確認
     end
