@@ -47,9 +47,10 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'faker'
   gem 'factory_bot_rails'
-  gem 'rubocop'
-  gem 'rubocop-rails'
-  gem 'rubocop-checkstyle_formatter'
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
   gem 'rspec-rails'
   gem 'rspec_junit_formatter'
 end
