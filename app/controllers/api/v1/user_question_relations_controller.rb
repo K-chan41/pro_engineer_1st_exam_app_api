@@ -27,4 +27,5 @@ class Api::V1::UserQuestionRelationsController < Api::V1::BaseController
       include: [:question] # 'include' オプションを設定
     }
   end
+
 end
