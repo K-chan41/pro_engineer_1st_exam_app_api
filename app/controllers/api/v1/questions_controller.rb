@@ -5,7 +5,7 @@ class Api::V1::QuestionsController < Api::V1::BaseController
     subject_ids = params[:subject_ids]
     questions = Question.includes(:choices, :subject, :label).where(subject_id: subject_ids).order(:id)
 
-    raise ActiveRecord::RecordNotFound, 'Questions not found' if questions.empty?
+    # raise ActiveRecord::RecordNotFound, 'Questions not found' if questions.empty?
 
     # Serialize questions with related choices, subjects, and labels
     json_string = QuestionSerializer.new(questions, options).serializable_hash.to_json
